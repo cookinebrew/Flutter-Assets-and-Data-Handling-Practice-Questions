@@ -1,0 +1,92 @@
+
+import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: HomePage(),
+    );
+  }
+}
+
+class HomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text("Flutter Practice Tasks")),
+      body: ListView(
+        children: [
+          const Task1(),
+          const Divider(),
+          const Task2(),
+          const Divider(),
+          const Task3(),
+        ],
+      ),
+    );
+  }
+}
+
+class Task1 extends StatelessWidget {
+  const Task1({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: const [
+        Text("Task 1: Display Image from Assets", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+        SizedBox(height: 10),
+        Image(
+          image: AssetImage('assets/sample_image.png'), //  in the assets folder
+          fit: BoxFit.contain,
+        ),
+      ],
+    );
+  }
+}
+
+class Task2 extends StatelessWidget {
+  const Task2({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        const Text("Task 2: Fetch Image from URL", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+        const SizedBox(height: 10),
+        CachedNetworkImage(
+          imageUrl: "https://via.placeholder.com/150", //  Google image URL
+          placeholder: (context, url) => const CircularProgressIndicator(),
+          errorWidget: (context, url, error) => const Icon(Icons.error),
+        ),
+      ],
+    );
+  }
+}
+
+class Task3 extends StatelessWidget {
+  const Task3({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        const Text("Task 3: Cache Images", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+        const SizedBox(height: 10),
+        CachedNetworkImage(
+          imageUrl: "https://via.placeholder.com/150", // Google image URL
+          placeholder: (context, url) => const CircularProgressIndicator(),
+          errorWidget: (context, url, error) => const Icon(Icons.error),
+        ),
+      ],
+    );
+  }
+}
